@@ -1,0 +1,70 @@
+<div class="form-container">
+    <h2>Update Details of Employee</h2>
+  
+    <form (ngSubmit)="onSubmit()">
+      <!-- Name Input -->
+      <label for="name">Name</label>
+      <input type="text" id="name" [(ngModel)]="employee.name" name="name" required />
+  
+      <!-- Profile Image Selection -->
+      <label>Profile Image</label>
+      <div style="display: flex;justify-content: space-between;width: 30vw;" class="profile-selection">
+        <label *ngFor="let img of profileImages">
+          <input type="radio" [(ngModel)]="employee.profilePic" name="profilePic" [value]="img" />
+          <img [src]="img" class="profile-pic" />
+        </label>
+      </div>
+  
+      <!-- Gender Selection -->
+      <label>Gender</label>
+      <div  style="display: flex; width: 30vw; justify-content: space-between;" class="gender-selection">
+        <label><input type="radio" [(ngModel)]="employee.gender" name="gender" value="Male" /> Male</label>
+        <label><input type="radio" [(ngModel)]="employee.gender" name="gender" value="Female" /> Female</label>
+      </div>
+  
+      <!-- Department Selection -->
+      <label>Department</label>
+      <div class="department-selection">
+        <label style="display: flex; flex-direction: row; width: 50vw; justify-content: space-between;" *ngFor="let dept of departments">
+            {{dept}}
+            <input type="checkbox" 
+            [value]="dept"
+            (change)="onDepartmentChange($event, dept)"
+            [checked]="employee.department.includes(dept)" />
+        </label>
+      </div>
+  
+      <!-- Salary Dropdown -->
+      <label for="salary">Salary</label>
+      <select id="salary" [(ngModel)]="employee.salary" name="salary">
+        <option *ngFor="let salary of salaryOptions" [value]="salary">{{ salary }}</option>
+      </select>
+  
+      <!-- Start Date Selection -->
+      <label>Start Date</label>
+      <div class="date-selection">
+        <!-- <select [(ngModel)]="employee.startDate.day" name="day">
+          <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+        </select>
+        <select [(ngModel)]="employee.startDate.month" name="month">
+          <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+        </select>
+        <select [(ngModel)]="employee.startDate.year" name="year">
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select> -->
+        <textarea id="startDate" [(ngModel)]="employee.startDate" name="startDate"></textarea>
+      </div>
+  
+      <!-- Notes Section -->
+      <label for="note">Notes</label>
+      <textarea id="note" [(ngModel)]="employee.note" name="note"></textarea>
+  
+      <!-- Form Buttons -->
+      <div class="button-group">
+        <button type="button" [routerLink]="['/']" class="cancel" (click)="onCancel()">HOME</button>
+        <button type="submit" class="submit">Submit</button>
+        <button type="reset" class="reset" (click)="onReset()">Reset</button>
+      </div>
+    </form>
+  </div>
+  

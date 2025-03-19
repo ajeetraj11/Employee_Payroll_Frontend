@@ -1,0 +1,42 @@
+<div class="dashboard-container">
+    <h2>Employee Details</h2>
+    <button class="add-user-btn"  [routerLink]="['/add']">+ Add User</button>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Profile</th>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Department</th>
+          <th>Note</th>
+          <th>Salary</th>
+          <th>Start Date</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td><img [src]="employee.profilePic" alt="Profile" class="profile-pic" /></td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.gender }}</td>
+          <td><span  class="dept">{{ employee.department }}</span></td>
+          <td>{{employee.note}}</td>
+          <td>₹{{ employee.salary | number }}</td>
+          <td>{{ employee.startDate | date }}</td>
+          <td>
+            <div class="edit">
+              <button [routerLink]="['/editpage']" (click)="send(employee.id)">
+
+                <i class="fa-solid fa-pen-to-square"></i> <!-- FontAwesome delete icon -->
+              </button>
+              <button (click)="deleteEmployee(employee.id)">
+                <i class="fa fa-trash"></i> <!-- FontAwesome delete icon -->
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
